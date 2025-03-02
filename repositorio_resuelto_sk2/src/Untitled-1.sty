@@ -1,0 +1,71 @@
+def formas_por_mes(ovnis:list[ovnis])->dict[datetime,set[str]]: 
+    '''
+    formas_por_mes: Función que devuelve un diccionario que indexa las distintas formas de avistamientos 
+    por los nombres de los meses en que se observaron. Por ejemplo, para el mes "Enero" se tendrá un 
+    conjunto con todas las formas distintas observadas en dicho mes. 
+    La función recibe una lista de namedtuple de tipo Avistamiento.'''
+
+    meses={}
+    for ovni in ovnis:
+        #mes = ovni.fecha.date().month
+        mes = ovni.fecha.month
+        # !! from calender import month_name !!!!!!!
+        #mes = month_name[ovni.fecha.month]
+        if mes not in meses:
+            meses[mes]=set()
+        meses[mes].add(ovni.forma)
+        meses_ordenados = {key : meses[key] for key in sorted(meses.keys())}
+        meses2 = month_name[key: meses_ordenados[key] for key in meses_ordenados.keys()]
+    return meses_ordenados
+         
+    ------------------------------
+    def formas_por_mes(ovnis:list[ovnis])->dict[datetime,set[str]]: 
+    '''
+    formas_por_mes: Función que devuelve un diccionario que indexa las distintas formas de avistamientos 
+    por los nombres de los meses en que se observaron. Por ejemplo, para el mes "Enero" se tendrá un 
+    conjunto con todas las formas distintas observadas en dicho mes. 
+    La función recibe una lista de namedtuple de tipo Avistamiento.'''
+
+    meses={}
+    for ovni in ovnis:
+        #mes = ovni.fecha.date().month
+        mes = ovni.fecha.month
+        # !! from calender import month_name !!!!!!!
+        #mes = month_name[ovni.fecha.month]
+        if mes not in meses:
+            meses[mes]=set()
+        meses[mes].add(ovni.forma)
+    meses_ordenados = {key : meses[key] for key in sorted(meses.keys())}
+    meses2 = {month_name[key]: meses_ordenados[key] for key in meses_ordenados.keys()}
+    return meses2
+
+-----------------
+    result = defaultdict(int)
+    for tupla in avistamientos:
+        result[tupla.fecha.year] += tupla.duracion
+    return max(result.items(), key = lambda a: a[1])[0]
+-------------
+
+anyos = {}
+for ovni in ovnis:
+    anyo = ovni.fecha.year
+    if anyo not in anyos:
+        anyos[anyo] = 0
+    anyos[anyo] += 1
+return anyos
+
+---------------------------------------
+meses = {month_name[i]: 0 for i in range(1, 13)}  # Inicializamos el diccionario con los meses y contadores en 0.
+
+    for ovni in ovnis:
+        mes = ovni.fecha.month  # Extraemos el número del mes
+        nombre_mes = month_name[mes]  # Convertimos el número en el nombre del mes
+        meses[nombre_mes] += 1  # Incrementamos el contador del mes correspondiente
+
+    return meses
+
+
+
+
+
+
